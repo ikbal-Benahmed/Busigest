@@ -1,0 +1,18 @@
+export const colors = {
+  deepBlue: "#2988BC",
+  sofBlue: "#7AB9DE",
+  gradientSoftBlue: "#70B3DA",
+  white: "#F7FCFF",
+  success: "#6FCF97",
+  error: "#EB5757",
+  warning: "#F2994A",
+  gray3: "#828282",
+  gray2: "#4F4F4F",
+  gray1: "#333333",
+  gray4: "#BDBDBD",
+  gray5: "#E0E0E0",
+  white: "#FFFFFF",
+  gray6: "#F7F7F7",
+  complementary: "#bc5d29",
+  darkBlue: "#124460",
+};
