@@ -677,11 +677,14 @@ export const get_state_amount = async (state, callback = () => undefined) => {
   );
 };
 export const format_price = (value = 0, reduce = true) => {
-  if (reduce) {
-    if (value > 1000000) return (value / 1000000).toFixed(2) + "M";
-    else if (value > 1000) return (value / 1000).toFixed(2) + "K";
-    else return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  } else return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  if (value) {
+    if (reduce) {
+      if (value > 1000000000) return (value / 1000000000).toFixed(2) + "Md";
+      else if (value > 1000000) return (value / 1000000).toFixed(2) + "M";
+      else if (value > 1000) return (value / 1000).toFixed(2) + "K";
+      else return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    } else return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  } else return value;
 };
 export const getClientName = async (
   idClient,

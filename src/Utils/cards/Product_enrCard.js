@@ -12,6 +12,8 @@ import {
   updateQte,
   updateSprice,
 } from "../../backend/functions";
+import languages from "../Translation/translation";
+import expressions from "../Translation/references";
 export default function Product_enrCard({
   item = { SPRICE: 0, BPRICE: 0, QTE: 0 },
   remove_item = () => undefined,
@@ -66,7 +68,7 @@ export default function Product_enrCard({
                 color: colors.darkBlue,
               }}
             >
-              Buying Price
+              {languages.t(expressions.buying_price)}
             </Text>
             <View
               style={{
@@ -132,7 +134,7 @@ export default function Product_enrCard({
                 }}
               >
                 {" "}
-                Da
+                {languages.t(expressions.da)}
               </Text>
             </View>
             <Text
@@ -148,7 +150,7 @@ export default function Product_enrCard({
         </View>
         <View>
           <Text style={{ textAlign: "left", color: colors.darkBlue }}>
-            Selling Price
+            {languages.t(expressions.selling_price)}
           </Text>
           <View
             style={{
@@ -207,13 +209,13 @@ export default function Product_enrCard({
               }}
             >
               {" "}
-              Da
+              {languages.t(expressions.da)}
             </Text>
           </View>
         </View>
         <View>
           <Text style={{ textAlign: "left", color: colors.darkBlue }}>
-            Quantity
+            {languages.t(expressions.quantity)}
           </Text>
           <View
             style={{

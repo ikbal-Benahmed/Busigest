@@ -17,10 +17,13 @@ import {
   getCommande_Gain,
   removePurchaseFromId,
 } from "../backend/functions";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const PurchaseDetails = ({
   DATECOMM = "Test Test Test",
   IDCLIENT = 0,
+
   IDCOMM = 1,
   clientName = 2000,
   TOTAL = 3000,
@@ -36,16 +39,18 @@ const PurchaseDetails = ({
   }, []);
   const createTwoButtonAlert = () =>
     Alert.alert(
-      "Deleting purchase",
-      `Are you sure you want to delete this purchase from your list ?`,
+      languages.t(expressions.deleting_purchase),
+      languages.t(
+        expressions.Are_you_sure_you_want_to_delete_this_purchase_from_your_list_
+      ),
       [
         {
-          text: "Cancel",
+          text: languages.t(expressions.Cancel),
           onPress: () => null,
           style: "cancel",
         },
         {
-          text: "YES",
+          text: languages.t(expressions.YES),
           onPress: () => {
             removePurchaseFromId(IDCOMM);
             setTimeout(() => {
@@ -60,12 +65,12 @@ const PurchaseDetails = ({
     return (
       <Text style={styles.subTitle} key={product.PRODNAME}>
         {product.PRODNAME +
-          "\t\tQuantity : " +
+          `\t\t${languages.t(expressions.quantity)} : ` +
           product.QUANTITY +
           " Pcs" +
-          "\t\tRemise : " +
+          `\t\t${languages.t(expressions.remise)} : ` +
           format_price(product.REMISE) +
-          " Da"}
+          ` ${languages.t(expressions.da)}`}
       </Text>
     );
   });

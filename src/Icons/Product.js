@@ -2,7 +2,7 @@ import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
 const Product = (props) => (
-  <Svg width={79} height={77} fill="none">
+  <Svg width={79} height={77} fill="none" transform={[{ scale: 0.6 }]}>
     <Path
       d="M13.64 21.23h51.207a7.5 7.5 0 0 1 7.479 6.94l2.863 38.27c.326 4.35-3.116 8.06-7.479 8.06H10.776c-4.362 0-7.804-3.71-7.479-8.06l2.864-38.27a7.5 7.5 0 0 1 7.479-6.94Z"
       stroke="#fff"

@@ -6,6 +6,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "../theme/colors";
 import { fonts, fontSizes } from "../theme/fonts";
 import { format_price } from "../backend/functions";
+import languages from "./Translation/translation";
+import expressions from "./Translation/references";
 
 export default function STATES({
   state = "UNPAID",
@@ -106,7 +108,7 @@ export default function STATES({
             textAlign: "center",
           }}
         >
-          {maping[the_state].text}
+          {languages.t(expressions[the_state])}
         </Text>
       )}
 
@@ -120,7 +122,9 @@ export default function STATES({
             textAlign: "center",
           }}
         >
-          {total ? format_price(total) + " Da" : 0 + " Da"}
+          {total
+            ? format_price(total) + " " + languages.t(expressions.da)
+            : 0 + " " + languages.t(expressions.da)}
         </Text>
       )}
     </TouchableOpacity>

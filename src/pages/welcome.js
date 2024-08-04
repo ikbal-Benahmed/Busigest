@@ -8,6 +8,7 @@ import {
   getProducts,
   getTop3,
   getTotalGain,
+  removeDB,
   removeDetailsCommandes,
   removeProducts,
   removePurchase,
@@ -20,6 +21,8 @@ import Upperbutton from "../Utils/upperButton";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { checkDB, exportDB } from "../backend/exportDB";
 import { Button } from "react-native-paper";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const Welcome = ({ navigation }) => {
   const [montant, setMontant] = useState();
@@ -90,7 +93,7 @@ const Welcome = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor: colors.deepBlue }}>
       <View style={{ paddingTop: sizes[3], paddingHorizontal: "10%" }}>
         <Upperbutton
-          text="My clients "
+          text={languages.t(expressions.my_clients)}
           icon={"people"}
           tl={sizes[1]}
           tr={sizes[1]}
@@ -103,7 +106,7 @@ const Welcome = ({ navigation }) => {
           }}
         />
         <Upperbutton
-          text="My products"
+          text={languages.t(expressions.my_products)}
           icon={"albums"}
           tl={sizes[1]}
           tr={sizes[1]}
@@ -116,7 +119,7 @@ const Welcome = ({ navigation }) => {
           }}
         />
         <Upperbutton
-          text="My sellings"
+          text={languages.t(expressions.my_sellings)}
           icon={"card"}
           tl={sizes[0]}
           tr={sizes[0]}
@@ -131,13 +134,13 @@ const Welcome = ({ navigation }) => {
         />
       </View>
       <View style={styles.vue}>
-        <Text style={styles.title}>Total Gain</Text>
+        <Text style={styles.title}>{languages.t(expressions.total_gain)}</Text>
         <Text style={styles.montant}>
           {format_price(montant)}{" "}
           <Text
             style={{ fontSize: fontSizes.h5_1, fontFamily: fonts.robotoThin }}
           >
-            Da
+            {languages.t(expressions.da)}
           </Text>
         </Text>
         <View
@@ -149,7 +152,7 @@ const Welcome = ({ navigation }) => {
           }}
         />
         <Text style={[styles.title, { marginTop: sizes[0] }]}>
-          Top 3 products
+          {languages.t(expressions.top_3_products)}
         </Text>
         <View
           style={{
@@ -172,7 +175,7 @@ const Welcome = ({ navigation }) => {
           )}
           <View>
             <Text style={{ color: "white", fontFamily: fonts.robotoThin }}>
-              From
+              {languages.t(expressions.from)}
             </Text>
             <Text
               style={{
@@ -206,7 +209,7 @@ const Welcome = ({ navigation }) => {
                 textAlign: "right",
               }}
             >
-              To
+              {languages.t(expressions.to)}
             </Text>
             <Text
               style={{
@@ -235,15 +238,17 @@ const Welcome = ({ navigation }) => {
               // removeDB();
               // writeQuery("DROP TABLE IF EXISTS DETAILCOMMANDE", db);
               // writeQuery("DROP TABLE IF EXISTS COMMANDE", db);
-
               // addClient("bibel", "0540693123", "Bordj Bou Arreridj");
               // addProduct("P1", 100, 200, 100);
               // getCommandeWithTurnover();
               await exportDB();
+              // removeDB();
               // await checkDB();
             }}
           >
-            <Text style={{ color: colors.white }}>Save DB</Text>
+            <Text style={{ color: colors.white }}>
+              {languages.t(expressions.save_db)}
+            </Text>
           </Button>
         </View>
       </View>

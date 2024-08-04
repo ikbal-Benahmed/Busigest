@@ -54,6 +54,9 @@ import {
 import Productetails1 from "./src/pages/ProductDetails1";
 import db from "./src/backend/DataBase";
 import { checkDB, exportDB } from "./src/backend/exportDB";
+import { useEffect } from "react";
+import * as Updates from "expo-updates";
+import { LanguageProvider } from "./src/Utils/contexts/Language_context";
 
 const Stack = createNativeStackNavigator();
 
@@ -69,6 +72,26 @@ export default function App() {
   const [openSansLoaded] = useOpenSans({
     OpenSans_600SemiBold,
   });
+  useEffect(() => {
+    const checkForUpdates = async () => {
+      try {
+        const update = await Updates.checkForUpdateAsync();
+        if (update.isAvailable) {
+          await Updates.fetchUpdateAsync();
+          alert(`THERE IS A NEW UPDATE 
+            
+              ENJOY THE NEW FEATURES`);
+          Updates.reloadAsync();
+        }
+      } catch (e) {
+        console.error(e);
+        alert(e);
+      }
+    };
+
+    checkForUpdates();
+  }, []);
+
   if (!robotoLoaded || !openSansLoaded) {
     return null;
   }
@@ -143,28 +166,33 @@ export default function App() {
           marginTop: Platform.OS === "android" ? StatusBar.currentHeight : null,
         }}
       >
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-              cardStyle: {
-                backgroundColor: "blue",
-              },
-            }}
-            initialRouteName="Welcome"
-          >
-            <Stack.Screen name="Welcome" component={Welcome} />
-            <Stack.Screen name="NewClient" component={NewClient} />
-            <Stack.Screen name="NewProduct" component={NewProduct} />
-            <Stack.Screen name="NewPurchase" component={NewPurchase} />
-            <Stack.Screen name="MyProducts" component={MyProducts} />
-            <Stack.Screen name="MyClients" component={MyClients} />
-            <Stack.Screen name="ProductDetails" component={Productetails1} />
-            <Stack.Screen name="ClientDetails" component={ClientDetails} />
-            <Stack.Screen name="MyPurchases" component={MyPurchases} />
-            <Stack.Screen name="PurchaseDetails" component={PurchaseDetails} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <LanguageProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+                cardStyle: {
+                  backgroundColor: "blue",
+                },
+              }}
+              initialRouteName="Welcome"
+            >
+              <Stack.Screen name="Welcome" component={Welcome} />
+              <Stack.Screen name="NewClient" component={NewClient} />
+              <Stack.Screen name="NewProduct" component={NewProduct} />
+              <Stack.Screen name="NewPurchase" component={NewPurchase} />
+              <Stack.Screen name="MyProducts" component={MyProducts} />
+              <Stack.Screen name="MyClients" component={MyClients} />
+              <Stack.Screen name="ProductDetails" component={Productetails1} />
+              <Stack.Screen name="ClientDetails" component={ClientDetails} />
+              <Stack.Screen name="MyPurchases" component={MyPurchases} />
+              <Stack.Screen
+                name="PurchaseDetails"
+                component={PurchaseDetails}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </LanguageProvider>
       </SafeAreaView>
     </View>
   );

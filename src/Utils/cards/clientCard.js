@@ -10,6 +10,8 @@ import { TouchableOpacity } from "react-native";
 import { Linking } from "react-native";
 import { wilayas } from "../../pages/wilayas";
 import { format_price, getTotalSpending } from "../../backend/functions";
+import languages from "../Translation/translation";
+import expressions from "../Translation/references";
 
 const Clientcard = ({
   id = 0,
@@ -109,13 +111,15 @@ const Clientcard = ({
         </View>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.subContainer}>
-            <Text style={styles.upper}>Total purchases :</Text>
+            <Text style={styles.upper}>
+              {languages.t(expressions.total_purchases)}
+            </Text>
             <Text style={[styles.down, { color: colors.deepBlue }]}>
               {format_price(amount) + " Da"}
             </Text>
           </View>
           <View style={styles.subContainer}>
-            <Text style={styles.upper}>City :</Text>
+            <Text style={styles.upper}>{languages.t(expressions.city)}</Text>
             <Text style={[styles.down, { color: colors.deepBlue }]}>
               {wilayas[city]}
             </Text>

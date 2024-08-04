@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, Text, FlatList, Keyboard } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { colors } from "../theme/colors";
 import { sizes } from "../theme/sizes";
 import { fonts, fontSizes } from "../theme/fonts";
@@ -29,7 +37,28 @@ const NewPurchase = ({ navigation }) => {
   const [clientSelec, setClientSelec] = useState("No client selected");
   const [products, setProducts] = useState([]);
   const [productsCopy, setProductsCopy] = useState([]);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
   useEffect(() => {
     getClients(fetchClients);
     getProducts(fetchProducts);
@@ -189,14 +218,18 @@ const NewPurchase = ({ navigation }) => {
   const showDatepicker = () => {
     showMode("date");
   };
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <KeyboardAvoidingView
         style={{
           flex: 1,
           alignItems: "center",
           backgroundColor: colors.deepBlue,
         }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.circle}>
           <Product />
@@ -373,59 +406,62 @@ const NewPurchase = ({ navigation }) => {
                   contentContainerStyle={{ padding: 4 }}
                 />
 
-                <View style={{ alignItems: "center", marginTop: sizes[1] }}>
-                  <Text style={styles.button}>Add product</Text>
-                  <TouchableOpacity
-                    style={{
-                      height: sizes[2] + 10,
-                      width: sizes[2] + 10,
-                      borderRadius: sizes[2] + 10 / 2,
-                      bordercolor: colors.white,
-                      backgroundColor: colors.white,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginTop: sizes[0],
-                    }}
-                    onPress={() => {
-                      if (productChoice.length === 0) setProductChoice([1]);
-                      else
-                        setProductChoice([
-                          ...productChoice,
-                          productChoice[productChoice.length - 1] + 1,
-                        ]);
-                    }}
-                  >
-                    <Ionicons
-                      name={"add"}
-                      color={colors.deepBlue}
-                      size={sizes[2] + 10}
-                    ></Ionicons>
-                  </TouchableOpacity>
-                </View>
-
-                <View
-                  style={{
-                    alignItems: "center",
-                    marginTop: sizes[1],
-                    marginBottom: sizes[1],
-                  }}
-                >
-                  <Button
-                    mode="contained"
-                    dark={true}
-                    color={colors.deepBlue}
-                    style={{ padding: 4 }}
-                    onPress={props.handleSubmit}
-                  >
-                    {" "}
-                    <Text style={styles.button}>Create</Text>
-                  </Button>
-                </View>
+                {!keyboardVisible && (
+                  <View>
+                    <View style={{ alignItems: "center", marginTop: sizes[1] }}>
+                      <Text style={styles.button}>Add product</Text>
+                      <TouchableOpacity
+                        style={{
+                          height: sizes[2] + 10,
+                          width: sizes[2] + 10,
+                          borderRadius: sizes[2] + 10 / 2,
+                          bordercolor: colors.white,
+                          backgroundColor: colors.white,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginTop: sizes[0],
+                        }}
+                        onPress={() => {
+                          if (productChoice.length === 0) setProductChoice([1]);
+                          else
+                            setProductChoice([
+                              ...productChoice,
+                              productChoice[productChoice.length - 1] + 1,
+                            ]);
+                        }}
+                      >
+                        <Ionicons
+                          name={"add"}
+                          color={colors.deepBlue}
+                          size={sizes[2] + 10}
+                        ></Ionicons>
+                      </TouchableOpacity>
+                    </View>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        marginTop: sizes[1],
+                        marginBottom: sizes[1],
+                      }}
+                    >
+                      <Button
+                        mode="contained"
+                        dark={true}
+                        color={colors.deepBlue}
+                        style={{ padding: 4 }}
+                        onPress={props.handleSubmit}
+                      >
+                        {" "}
+                        <Text style={styles.button}>Create</Text>
+                      </Button>
+                    </View>
+                  </View>
+                )}
               </View>
             )}
           </Formik>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
@@ -452,7 +488,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     width: "100%",
-    height: "80%",
+    height: "87%",
     backgroundColor: colors.sofBlue,
     borderTopLeftRadius: sizes[2],
     borderTopRightRadius: sizes[2],

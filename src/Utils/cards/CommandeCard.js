@@ -12,6 +12,8 @@ import { colors } from "../../theme/colors";
 import { fonts, fontSizes } from "../../theme/fonts";
 import { sizes } from "../../theme/sizes";
 import STATES from "../states.js";
+import languages from "../Translation/translation.js";
+import expressions from "../Translation/references.js";
 
 const CommandeCard = ({
   DATECOMM = "15/07/2020",
@@ -94,7 +96,9 @@ const CommandeCard = ({
                 gap: Platform.OS == "ios" ? "5%" : 0,
               }}
             >
-              <Text style={styles.upper}>Amount: </Text>
+              <Text style={styles.upper}>
+                {languages.t(expressions.amount)}{" "}
+              </Text>
               <Text
                 style={{
                   fontFamily: fonts.robotoMedium,
@@ -102,7 +106,7 @@ const CommandeCard = ({
                   fontSize: fontSizes.body,
                 }}
               >
-                {format_price(item.TOTAL) + " Da"}
+                {format_price(item.TOTAL) + " " + languages.t(expressions.da)}
               </Text>
             </View>
           </View>
@@ -114,7 +118,9 @@ const CommandeCard = ({
               marginTop: sizes[0] - 4,
             }}
           >
-            <Text style={[styles.upper]}>Purchase date</Text>
+            <Text style={[styles.upper]}>
+              {languages.t(expressions.purchase_date)}{" "}
+            </Text>
             <Text style={[styles.down, { width: "56%" }]}>{DATECOMM}</Text>
           </View>
         </View>

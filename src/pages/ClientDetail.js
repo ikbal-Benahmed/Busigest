@@ -14,6 +14,8 @@ import {
 import OutlinedInput from "../Utils/inputs/outlinedInput";
 import { wilayas } from "./wilayas";
 import Person from "../Icons/Person";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const ClientDetails = ({
   NAME = "Test Test Test",
@@ -70,7 +72,7 @@ const ClientDetails = ({
             fontSize: fontSizes.h4,
           }}
         >
-          Client details
+          {languages.t(expressions.client_details)}
         </Text>
         <View
           style={{
@@ -108,104 +110,111 @@ const ClientDetails = ({
             {NAME}
           </Text>
         </View>
+
         <View
           style={{
-            display: "flex",
+            // marginLeft: sizes[0],
+            // flex: 1,
+            width: "100%",
             flexDirection: "row",
             alignItems: "center",
-            marginTop: sizes[1],
+
+            justifyContent: "space-between",
+            paddingHorizontal: sizes[1],
           }}
         >
-          <View
-            style={{
-              marginLeft: sizes[0],
-              flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingTop: sizes[1],
-                }}
-              >
-                <View style={{ marginRight: sizes[0] }}>
-                  <Ionicons
-                    color={colors.darkBlue}
-                    name="call"
-                    size={fontSizes.button}
-                  />
-                </View>
-                <Text
-                  style={{
-                    color: colors.darkBlue,
-                    fontFamily: fonts.OpenSans_700Bold,
-                    fontSize: fontSizes.title,
-                  }}
-                >
-                  Phone number
-                </Text>
-              </View>
-              <Text style={[styles.subTitle, { marginLeft: sizes[1] }]}>
-                {finalPhone}
-              </Text>
-            </View>
-            <View style={{ alignItems: "center", marginLeft: sizes[1] }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: "60%",
-                }}
-              >
-                <OutlinedInput
-                  value={phone}
-                  backColor={colors.white}
-                  label="Change phone number"
-                  placeholder="Change number here"
-                  keyboardType="phone-pad"
-                  textColor={colors.deepBlue}
-                  OnChangeText={(text) => {
-                    setPhone(text);
-                  }}
+          <View style={{ width: "60%" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingTop: sizes[1],
+              }}
+            >
+              <View style={{ marginRight: sizes[0] }}>
+                <Ionicons
+                  color={colors.darkBlue}
+                  name="call"
+                  size={fontSizes.button}
                 />
               </View>
-              <View
+              <Text
                 style={{
-                  width: "60%",
+                  color: colors.darkBlue,
+                  fontFamily: fonts.OpenSans_700Bold,
+                  fontSize: fontSizes.title,
                 }}
               >
-                <Button
-                  mode="contained"
-                  dark={true}
-                  color={colors.deepBlue}
-                  onPress={() => {
-                    if (
-                      (phone.slice(0, 2) === "05" ||
-                        phone.slice(0, 2) === "07" ||
-                        phone.slice(0, 2) === "06") &&
-                      phone.length === 10
-                    ) {
-                      setFinalPhone(phone);
-                      updatePhone(id, phone);
-                    } else {
-                      alert("Please, enter a valid phone number");
-                    }
-
-                    setPhone("");
-                  }}
-                >
-                  <Text style={styles.button}>Submit</Text>
-                </Button>
-              </View>
+                {languages.t(expressions.phone_number)}
+              </Text>
             </View>
+            <Text
+              style={[
+                styles.subTitle,
+                {
+                  marginLeft: sizes[1],
+                  textAlign: "left",
+                },
+              ]}
+            >
+              {finalPhone}
+            </Text>
           </View>
           <View
-            style={{ flexDirection: "row", justifyContent: "flex-end" }}
-          ></View>
+            style={{
+              width: "40%",
+            }}
+          >
+            <OutlinedInput
+              value={phone}
+              backColor={colors.white}
+              label={languages.t(expressions.Change_phone_number)}
+              placeholder="Change number here"
+              keyboardType="phone-pad"
+              textColor={colors.deepBlue}
+              OnChangeText={(text) => {
+                setPhone(text);
+              }}
+            />
+
+            <View
+              style={
+                {
+                  // width: "60%",
+                }
+              }
+            >
+              <Button
+                mode="contained"
+                dark={true}
+                color={colors.deepBlue}
+                onPress={() => {
+                  if (
+                    (phone.slice(0, 2) === "05" ||
+                      phone.slice(0, 2) === "07" ||
+                      phone.slice(0, 2) === "06") &&
+                    phone.length === 10
+                  ) {
+                    setFinalPhone(phone);
+                    updatePhone(id, phone);
+                  } else {
+                    alert("Please, enter a valid phone number");
+                  }
+
+                  setPhone("");
+                }}
+              >
+                <Text style={styles.button}>
+                  {languages.t(expressions.submit)}
+                </Text>
+              </Button>
+            </View>
+          </View>
         </View>
+        <View
+          style={{ flexDirection: "row", justifyContent: "flex-end" }}
+        ></View>
+
         <View
           style={{
             display: "flex",
@@ -243,7 +252,7 @@ const ClientDetails = ({
                     fontSize: fontSizes.title,
                   }}
                 >
-                  CITY
+                  {languages.t(expressions.city)}
                 </Text>
               </View>
               <Text style={[styles.subTitle, { marginLeft: sizes[1] }]}>
@@ -256,19 +265,23 @@ const ClientDetails = ({
           ></View>
         </View>
         <View style={{ marginTop: sizes[3] }}>
-          <Text style={styles.title}>Client's tunover</Text>
+          <Text style={styles.title}>
+            {languages.t(expressions.client_turnover)}
+          </Text>
           <View>
             <Text style={styles.subTitle}>
               {turnover
-                ? format_price(turnover) + " Da"
-                : "Client never bought"}
+                ? format_price(turnover) + ` ${languages.t(expressions.da)}`
+                : languages.t(expressions.Client_never_bought)}
             </Text>
             <Button
               style={{ paddingTop: sizes[1] }}
               color={colors.error}
               onPress={() => createTwoButtonAlert()}
             >
-              <Text style={styles.buttonContent}>Remove client</Text>
+              <Text style={styles.buttonContent}>
+                {languages.t(expressions.remove_client)}
+              </Text>
             </Button>
           </View>
         </View>
@@ -326,7 +339,7 @@ const styles = StyleSheet.create({
   button: {
     color: colors.white,
     fontFamily: fonts.OpenSans_700Bold,
-    fontSize: fontSizes.title,
+    fontSize: fontSizes.button,
     textAlign: "center",
     marginTop: sizes[0],
   },

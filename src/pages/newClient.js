@@ -10,6 +10,8 @@ import { Picker } from "@react-native-picker/picker";
 import { Button } from "react-native-paper";
 import { addClient, removeTable } from "../backend/functions";
 import { TouchableWithoutFeedback } from "react-native";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 const NewClient = ({ navigation }) => {
   // ...
   const dismissKeyboard = () => {
@@ -31,7 +33,9 @@ const NewClient = ({ navigation }) => {
           <Person />
         </View>
         <View style={styles.vue}>
-          <Text style={styles.title}>New client</Text>
+          <Text style={styles.title}>
+            {languages.t(expressions.new_client)}
+          </Text>
           <Formik
             initialValues={{ name: "", phoneN: "", city: "" }}
             onSubmit={(values) => {
@@ -56,16 +60,15 @@ const NewClient = ({ navigation }) => {
             {(props) => (
               <View style={{ flex: 1, width: "90%" }}>
                 <OutlinedInput
-                  label="Name"
+                  label={languages.t(expressions.name)}
                   OnChangeText={props.handleChange("name")}
                   handleBlur={props.handleBlur("name")}
                 />
                 <OutlinedInput
                   OnChangeText={props.handleChange("phoneN")}
                   handleBlur={props.handleBlur("phoneN")}
-                  label="Phone number"
+                  label={languages.t(expressions.phone_number)}
                   keyboardType="phone-pad"
-                  placeholder="Client's phonr number here"
                 />
                 <View
                   style={{
@@ -85,7 +88,7 @@ const NewClient = ({ navigation }) => {
                       justifyContent: "flex-start",
                     }}
                   >
-                    City
+                    {languages.t(expressions.city)}
                   </Text>
                   <View
                     style={{
@@ -105,7 +108,10 @@ const NewClient = ({ navigation }) => {
                       }}
                       selectedValue={props.values.city}
                     >
-                      <Picker.Item label="Select a city" value="" />
+                      <Picker.Item
+                        label={languages.t(expressions.select_a_city)}
+                        value=""
+                      />
                       <Picker.Item label="01 - Adrar" value="01" />
                       <Picker.Item label="02 - Chlef" value="02" />
                       <Picker.Item label="03 - Laghouat" value="03" />
@@ -179,7 +185,9 @@ const NewClient = ({ navigation }) => {
                     onPress={props.handleSubmit}
                   >
                     {" "}
-                    <Text style={styles.button}>Create</Text>
+                    <Text style={styles.button}>
+                      {languages.t(expressions.create)}
+                    </Text>
                   </Button>
                 </View>
               </View>
@@ -213,7 +221,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     width: "100%",
-    height: "60%",
+    height: "78%",
     backgroundColor: colors.sofBlue,
     borderTopLeftRadius: sizes[2],
     borderTopRightRadius: sizes[2],

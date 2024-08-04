@@ -18,6 +18,8 @@ import { sansAccent } from "./sansAccent";
 import STATES from "../Utils/states";
 import paiements from "../Utils/paiements";
 import { TouchableWithoutFeedback } from "react-native";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const MyPurchases = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -173,7 +175,7 @@ const MyPurchases = ({ navigation }) => {
               fontSize: fontSizes.h4,
             }}
           >
-            My Sellings
+            {languages.t(expressions.my_sellings)}
           </Text>
           <View
             style={{
@@ -278,7 +280,7 @@ const MyPurchases = ({ navigation }) => {
           >
             <View>
               <Text style={[styles.total, { fontSize: fontSizes.title }]}>
-                Total Turnover
+                {languages.t(expressions.total_turnover)}
               </Text>
               <View
                 style={{
@@ -290,7 +292,7 @@ const MyPurchases = ({ navigation }) => {
                 <Text style={styles.total}>
                   {total ? format_price(total) : 0}{" "}
                   <Text style={[styles.total, { fontSize: fontSizes.h5 }]}>
-                    Da
+                    {languages.t(expressions.da)}
                   </Text>
                 </Text>
               </View>
@@ -302,7 +304,7 @@ const MyPurchases = ({ navigation }) => {
                   { fontSize: fontSizes.title, textAlign: "right" },
                 ]}
               >
-                Total Gain
+                {languages.t(expressions.total_gain)}
               </Text>
 
               <View
@@ -311,7 +313,7 @@ const MyPurchases = ({ navigation }) => {
                 <Text style={styles.gain}>
                   {gain ? format_price(gain) : 0}{" "}
                   <Text style={[styles.gain, { fontSize: fontSizes.h5 }]}>
-                    Da
+                    {languages.t(expressions.da)}
                   </Text>
                 </Text>
               </View>
@@ -319,7 +321,7 @@ const MyPurchases = ({ navigation }) => {
           </View>
         </View>
         <LastButton
-          title="New Purchase"
+          title={languages.t(expressions.new_purchase)}
           onPress={() => navigation.navigate("NewPurchase")}
         />
       </View>

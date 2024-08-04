@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     width: "100%",
-    height: "60%",
+    height: "78%",
     backgroundColor: colors.sofBlue,
     borderTopLeftRadius: sizes[2],
     borderTopRightRadius: sizes[2],

@@ -2,7 +2,7 @@ import * as React from "react";
 import { TextInput } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import { colors } from "../../theme/colors";
-import { fonts } from "@rneui/base";
+
 const OutlinedInput = ({
   label = "Name....",
   placeholder = "client's name here",
@@ -17,7 +17,7 @@ const OutlinedInput = ({
     <View style={styles.container}>
       <TextInput
         mode="outlined"
-        onBlur={handleBlur}
+        // onBlur={handleBlur}
         placeholder={label}
         // value={value ? value : null}
         keyboardType={keyboardType}

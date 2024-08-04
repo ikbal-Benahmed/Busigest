@@ -61,9 +61,6 @@ const Productetails = ({
       ]
     );
   useEffect(() => {
-    console.log("====================================");
-    console.log("INSIDE PRODUCT DETAILS");
-    console.log("====================================");
     // getTurnover(IDPRODUCT, fetchTunover);
   }, []);
   const fetchTunover = (res) => {

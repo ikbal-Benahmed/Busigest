@@ -6,6 +6,8 @@ import { colors } from "../../theme/colors";
 import { fontSizes } from "../../theme/fonts";
 import { sizes } from "../../theme/sizes";
 import { format_price } from "../../backend/functions";
+import languages from "../Translation/translation";
+import expressions from "../Translation/references";
 
 const Productcard = ({
   name = "FreeFire Topup",
@@ -42,16 +44,24 @@ const Productcard = ({
             </Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.upper}>Buying price</Text>
-            <Text style={styles.down}>{format_price(bprice) + " Da"}</Text>
+            <Text style={styles.upper}>
+              {languages.t(expressions.buying_price)}
+            </Text>
+            <Text style={styles.down}>
+              {format_price(bprice) + ` ${languages.t(expressions.da)}`}
+            </Text>
           </View>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.upper}>Selling price</Text>
-            <Text style={styles.down}>{format_price(sPrice) + " Da"}</Text>
+            <Text style={styles.upper}>
+              {languages.t(expressions.selling_price)}
+            </Text>
+            <Text style={styles.down}>
+              {format_price(sPrice) + ` ${languages.t(expressions.da)}`}
+            </Text>
           </View>
         </View>
         <View style={{ alignItems: "flex-end", paddingRight: sizes[1] }}>
-          <Text style={styles.upper}>Quantity</Text>
+          <Text style={styles.upper}>{languages.t(expressions.quantity)}</Text>
           <Text
             style={{
               textAlign: "center",

@@ -31,6 +31,8 @@ import {
 import { FlatList } from "react-native";
 import Product_enrCard from "../Utils/cards/Product_enrCard";
 import { Fontisto } from "@expo/vector-icons";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const Productetails1 = ({
   PRODNAME = "Test Test Test",
@@ -96,7 +98,7 @@ const Productetails1 = ({
             fontSize: fontSizes.h4,
           }}
         >
-          Product details
+          {languages.t(expressions.product_details)}
         </Text>
       </View>
 
@@ -177,7 +179,7 @@ const Productetails1 = ({
               fontSize: fontSizes.title,
             }}
           >
-            New Stock
+            {languages.t(expressions.new_stock)}
           </Text>
         </TouchableOpacity>
         <View
@@ -195,25 +197,29 @@ const Productetails1 = ({
           >
             <View>
               <Text style={[styles.title, { textAlign: "left" }]}>
-                Product's tunover
+                {languages.t(expressions.product_turnover)}
               </Text>
               <View>
                 <Text style={[styles.subTitle, { textAlign: "left" }]}>
                   {tunover
-                    ? format_price(tunover, false) + " Da"
-                    : "Product never sold"}
+                    ? format_price(tunover, false) +
+                      " " +
+                      languages.t(expressions.da)
+                    : languages.t(expressions.Product_never_sold)}
                 </Text>
               </View>
             </View>
             <View>
               <Text style={[styles.title, { textAlign: "right" }]}>
-                Stock Value
+                {languages.t(expressions.stock_value)}
               </Text>
               <View>
                 <Text style={[styles.subTitle, { textAlign: "right" }]}>
                   {stock_value
-                    ? format_price(stock_value[0].VALUE, false) + " Da"
-                    : "Product never sold"}
+                    ? format_price(stock_value[0].VALUE, false) +
+                      " " +
+                      languages.t(expressions.da)
+                    : languages.t(expressions.Product_never_sold)}
                 </Text>
               </View>
             </View>
@@ -224,7 +230,9 @@ const Productetails1 = ({
           color={colors.error}
           onPress={() => createTwoButtonAlert()}
         >
-          <Text style={styles.buttonContent}>Remove product</Text>
+          <Text style={styles.buttonContent}>
+            {languages.t(expressions.remove_product)}
+          </Text>
         </Button>
       </View>
     </View>

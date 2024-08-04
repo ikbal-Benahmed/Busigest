@@ -14,6 +14,8 @@ import {
   total_stock_value,
 } from "../backend/functions";
 import LastButton from "../Utils/LastButton";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 
 const MyProducts = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,7 +48,7 @@ const MyProducts = ({ navigation }) => {
             fontSize: fontSizes.h4,
           }}
         >
-          My Products
+          {languages.t(expressions.my_products)}
         </Text>
         <View
           style={{
@@ -61,7 +63,7 @@ const MyProducts = ({ navigation }) => {
           style={{ width: "90%", alignSelf: "center", marginBottom: sizes[1] }}
         >
           <Searchbar
-            placeholder="Search"
+            placeholder={languages.t(expressions.search)}
             onChangeText={onChangeSearch}
             value={searchQuery}
           />
@@ -110,7 +112,7 @@ const MyProducts = ({ navigation }) => {
       >
         <View>
           <Text style={[styles.total, { fontSize: fontSizes.title }]}>
-            Total Stock
+            {languages.t(expressions.total_stock)}
           </Text>
           <View
             style={{
@@ -121,25 +123,29 @@ const MyProducts = ({ navigation }) => {
           >
             <Text style={styles.total}>
               {stock_value ? format_price(stock_value[0].VALUE) : 0}{" "}
-              <Text style={[styles.total, { fontSize: fontSizes.h5 }]}>Da</Text>
+              <Text style={[styles.total, { fontSize: fontSizes.h5 }]}>
+                {languages.t(expressions.da)}
+              </Text>
             </Text>
           </View>
         </View>
         <View>
           <Text style={[styles.gain, { fontSize: fontSizes.title }]}>
-            Total Gain
+            {languages.t(expressions.total_gain)}
           </Text>
 
           <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
             <Text style={styles.gain}>
               {gain ? format_price(gain[0].VALUE) : 0}{" "}
-              <Text style={[styles.gain, { fontSize: fontSizes.h5 }]}>Da</Text>
+              <Text style={[styles.gain, { fontSize: fontSizes.h5 }]}>
+                {languages.t(expressions.da)}
+              </Text>
             </Text>
           </View>
         </View>
       </View>
       <LastButton
-        title="New Product"
+        title={languages.t(expressions.new_product)}
         onPress={() => navigation.navigate("NewProduct")}
       />
     </View>

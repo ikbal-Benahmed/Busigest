@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   Text,
   Platform,
+  Keyboard,
 } from "react-native";
 import { colors } from "../../theme/colors";
 import RNPickerDialog from "rn-modal-picker";
 import { sizes } from "../../theme/sizes";
 import { fontSizes } from "../../theme/fonts";
 import OutlinedInput from "../inputs/outlinedInput";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const betterProductName = (name) => {
   if (name === "No Product Selected") return name;
@@ -116,7 +116,7 @@ const PurchaseCard = ({
         >
           <View style={{ width: "40%" }}>
             <OutlinedInput
-              keyboardType={"decimal-pad"}
+              keyboardType="phone-pad"
               OnChangeText={(text) =>
                 setProductSelec({ ...productSelec, qte: parseFloat(text) })
               }
@@ -125,7 +125,7 @@ const PurchaseCard = ({
           </View>
           <View style={{ width: "53%" }}>
             <OutlinedInput
-              keyboardType={"decimal-pad"}
+              keyboardType="phone-pad"
               OnChangeText={(text) =>
                 setProductSelec({ ...productSelec, remise: parseFloat(text) })
               }
