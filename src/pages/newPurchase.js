@@ -27,6 +27,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import RNPickerDialog from "rn-modal-picker";
 import PurchaseCard from "../Utils/cards/PurchaseCard";
 import { TouchableWithoutFeedback } from "react-native";
+import languages from "../Utils/Translation/translation";
+import expressions from "../Utils/Translation/references";
 const NewPurchase = ({ navigation }) => {
   const formikRef = useRef();
   const [date, setDate] = useState(getCurrentDate());
@@ -34,7 +36,9 @@ const NewPurchase = ({ navigation }) => {
   const [show, setShow] = useState(false);
   const [clients, setClients] = useState([]);
   const [productChoice, setProductChoice] = useState([]);
-  const [clientSelec, setClientSelec] = useState("No client selected");
+  const [clientSelec, setClientSelec] = useState(
+    languages.t(expressions.No_client_selected)
+  );
   const [products, setProducts] = useState([]);
   const [productsCopy, setProductsCopy] = useState([]);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
@@ -81,9 +85,9 @@ const NewPurchase = ({ navigation }) => {
             item.PRODNAME +
             " || QTE : " +
             item.QTE +
-            " || Selling Price : " +
+            ` || ${languages.t(expressions.selling_price)} : ` +
             item.SPRICE +
-            " Da",
+            ` ${languages.t(expressions.da)}`,
         });
     });
     setProductsCopy(final);
@@ -206,7 +210,9 @@ const NewPurchase = ({ navigation }) => {
   };
   const getSpriceFromProductName = (name) => {
     if (name) {
-      const final = name.split("Selling price :")[1] - " Da";
+      const final =
+        name.split(`${languages.t(expressions.selling_price)} :`)[1] -
+        ` ${languages.t(expressions.da)}`;
       let qte = name.split("QTE :")[1].split(" ")[0];
       const res = parseFloat(final);
       qte = parseInt(qte);
@@ -235,7 +241,9 @@ const NewPurchase = ({ navigation }) => {
           <Product />
         </View>
         <View style={styles.vue}>
-          <Text style={styles.title}>New purchase</Text>
+          <Text style={styles.title}>
+            {languages.t(expressions.new_purchase)}
+          </Text>
           <Formik
             innerRef={formikRef}
             initialValues={{
@@ -245,14 +253,19 @@ const NewPurchase = ({ navigation }) => {
             }}
             onSubmit={(values) => {
               if (values.client === "" || values.commandes.length === 0) {
-                alert("Please chose the client and add products");
+                alert(
+                  languages.t(
+                    expressions.Please_chose_the_client_and_add_products
+                  )
+                );
               } else {
                 const res = values.commandes;
 
                 if (res[0].id === undefined) {
                   res.shift();
                 }
-                if (checkQuantity(res)) alert("Please add a quantity");
+                if (checkQuantity(res))
+                  alert(languages.t(expressions.Please_add_a_quantity));
                 else {
                   let bool = false;
                   res.forEach((item) => {
@@ -261,9 +274,9 @@ const NewPurchase = ({ navigation }) => {
                     ) {
                       bool = true;
                       alert(
-                        "Quantity of " +
+                        `${languages.t(expressions.Quantity_of)} ` +
                           item.productName.split("||")[0].split("-")[1].trim() +
-                          " must be less than " +
+                          ` ${languages.t(expressions.must_be_less_than)} ` +
                           getQuantityFromProductName(item.productName)
                       );
                     }
@@ -272,9 +285,9 @@ const NewPurchase = ({ navigation }) => {
                     ) {
                       bool = true;
                       alert(
-                        "Remise of " +
+                        `${languages.t(expressions.Remise_of)} ` +
                           item.productName.split("||")[0].split("-")[1].trim() +
-                          " must be less than " +
+                          ` ${languages.t(expressions.must_be_less_than)} ` +
                           getSpriceFromProductName(item.productName)
                       );
                     }
@@ -290,7 +303,7 @@ const NewPurchase = ({ navigation }) => {
                       res
                     );
                     setProductChoice([]);
-                    setClientSelec("No client selected");
+                    setClientSelec(languages.t(expressions.No_client_selected));
                     setTimeout(() => {
                       navigation.navigate("MyPurchases");
                     }, 1000);
@@ -309,7 +322,7 @@ const NewPurchase = ({ navigation }) => {
             }}
           >
             {(props) => (
-              <View style={{ flex: 1, width: "90%" }}>
+              <View style={{ flex: 1, width: "95%" }}>
                 <View
                   style={{
                     flexDirection: "row",
@@ -331,7 +344,7 @@ const NewPurchase = ({ navigation }) => {
                         fontSize: fontSizes.button + 2,
                       }}
                     >
-                      Selected : {date}
+                      {languages.t(expressions.Selected)} : {date}
                     </Text>
                   </View>
                   {show && (
@@ -356,7 +369,7 @@ const NewPurchase = ({ navigation }) => {
                       color={colors.deepBlue}
                       onPress={showDatepicker}
                     >
-                      Change Date
+                      {languages.t(expressions.change_date)}
                     </Button>
                   </View>
                 </View>
@@ -371,14 +384,16 @@ const NewPurchase = ({ navigation }) => {
                   >
                     <RNPickerDialog
                       data={clients}
-                      pickerTitle={"Clients"}
+                      pickerTitle={languages.t(expressions.client)}
                       showSearchBar={true}
                       showPickerTitle={true}
                       selectedText={clientSelec}
                       pickerStyle={{ margin: -10 }}
                       placeHolderText={"Try again"}
                       selectedTextStyle={{ color: colors.white }}
-                      searchBarPlaceHolder={"Search....."}
+                      searchBarPlaceHolder={`${languages.t(
+                        expressions.search
+                      )}.....`}
                       searchBarPlaceHolderColor={"#9d9d9d"}
                       dropDownIcon={require("../Icons/dropDown.png")}
                       placeHolderTextColor={"white"}
@@ -403,13 +418,14 @@ const NewPurchase = ({ navigation }) => {
                     );
                   }}
                   keyExtractor={(item) => item}
-                  contentContainerStyle={{ padding: 4 }}
                 />
 
                 {!keyboardVisible && (
                   <View>
                     <View style={{ alignItems: "center", marginTop: sizes[1] }}>
-                      <Text style={styles.button}>Add product</Text>
+                      <Text style={styles.button}>
+                        {languages.t(expressions.add_product)}
+                      </Text>
                       <TouchableOpacity
                         style={{
                           height: sizes[2] + 10,
@@ -452,7 +468,9 @@ const NewPurchase = ({ navigation }) => {
                         onPress={props.handleSubmit}
                       >
                         {" "}
-                        <Text style={styles.button}>Create</Text>
+                        <Text style={styles.button}>
+                          {languages.t(expressions.create)}
+                        </Text>
                       </Button>
                     </View>
                   </View>

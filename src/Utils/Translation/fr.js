@@ -61,6 +61,18 @@ const content_fr = {
   Cancel: "Annuler",
   YES: "Oui",
   remise: "Remise",
+  Please_chose_the_client_and_add_products:
+    "Veuillez choisir le client et ajouter des produits",
+  Please_add_a_quantity: "Veuillez ajouter une quantité",
+  Quantity_of: "Quantité de",
+  must_be_less_than: "doit être inférieur à",
+  Remise_of: "Remise de",
+  No_client_selected: "Aucun client sélectionné",
+  Selected: "Sélectionné",
+  change_date: "Changer la date",
+  add_product: "Ajouter un produit",
+  No_Product_Selected: "Aucun produit sélectionné",
+  try_again: "Réessayer",
 };
 
 export default content_fr;

@@ -61,6 +61,18 @@ const expressions = {
   Cancel: "Cancel",
   YES: "YES",
   remise: "remise",
+  Please_chose_the_client_and_add_products:
+    "Please_chose_the_client_and_add_products",
+  Please_add_a_quantity: "Please_add_a_quantity",
+  Quantity_of: "Quantity_of",
+  must_be_less_than: "must_be_less_than",
+  Remise_of: "Remise_of",
+  No_client_selected: "No_client_selected",
+  Selected: "Selected",
+  change_date: "change_date",
+  add_product: "add_product",
+  No_Product_Selected: "No_Product_Selected",
+  try_again: "try_again",
 };
 
 export default expressions;

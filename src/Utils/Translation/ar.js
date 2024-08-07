@@ -61,6 +61,18 @@ const content_ar = {
   Cancel: "إلغاء",
   YES: "نعم",
   remise: "خصم",
+  Please_chose_the_client_and_add_products:
+    "يرجى اختيار العميل وإضافة المنتجات",
+  Please_add_a_quantity: "يرجى إضافة كمية",
+  Quantity_of: "الكمية من",
+  must_be_less_than: "يجب أن تكون أقل من",
+  Remise_of: "خصم من",
+  No_client_selected: "لم يتم اختيار عميل",
+  Selected: "تم الاختيار",
+  change_date: "تغيير التاريخ",
+  add_product: "إضافة منتج",
+  No_Product_Selected: "لم يتم اختيار منتج",
+  try_again: "حاول مرة أخرى",
 };
 
 export default content_ar;

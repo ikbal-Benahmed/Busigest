@@ -61,6 +61,19 @@ const content_en = {
   Cancel: "Cancel",
   YES: "Yes",
   remise: "Discount",
+  Please_chose_the_client_and_add_products:
+    "Please chose the client and add products",
+  Please_chose_the_client_and_add_products:
+    "Please chose the client and add products",
+  Quantity_of: "Quantity of",
+  must_be_less_than: "must be less than",
+  Remise_of: "Remise of",
+  No_client_selected: "No client selected",
+  Selected: "Selected",
+  add_product: "Add Product",
+  change_date: "Change Date",
+  No_Product_Selected: "No Product Selected",
+  try_again: "Try Again",
 };
 
 export default content_en;

@@ -12,6 +12,8 @@ import RNPickerDialog from "rn-modal-picker";
 import { sizes } from "../../theme/sizes";
 import { fontSizes } from "../../theme/fonts";
 import OutlinedInput from "../inputs/outlinedInput";
+import languages from "../Translation/translation";
+import expressions from "../Translation/references";
 
 const betterProductName = (name) => {
   if (name === "No Product Selected") return name;
@@ -53,7 +55,7 @@ const PurchaseCard = ({
             borderWidth: 1,
             borderRadius: 5,
             borderColor: colors.white,
-            width: "80%",
+            width: "70%",
             marginBottom: -10,
             paddingRight: 5,
           }}
@@ -80,7 +82,8 @@ const PurchaseCard = ({
           onPress={() => removeCallBack(item)}
           style={{
             marginLeft: sizes[0],
-            padding: sizes[0],
+            paddingVertical: sizes[0],
+            paddingHorizontal: sizes[0],
             backgroundColor: colors.error,
             marginTop: sizes[1],
           }}
@@ -91,7 +94,7 @@ const PurchaseCard = ({
               fontSize: fontSizes.button,
             }}
           >
-            Remove
+            {languages.t(expressions.remove)}
           </Text>
         </TouchableOpacity>
       </View>
@@ -120,7 +123,7 @@ const PurchaseCard = ({
               OnChangeText={(text) =>
                 setProductSelec({ ...productSelec, qte: parseFloat(text) })
               }
-              label="Quantity"
+              label={languages.t(expressions.quantity)}
             />
           </View>
           <View style={{ width: "53%" }}>
@@ -129,7 +132,7 @@ const PurchaseCard = ({
               OnChangeText={(text) =>
                 setProductSelec({ ...productSelec, remise: parseFloat(text) })
               }
-              label="Remise"
+              label={languages.t(expressions.remise)}
             />
           </View>
         </View>

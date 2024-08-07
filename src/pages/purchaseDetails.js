@@ -76,8 +76,8 @@ const PurchaseDetails = ({
   });
 
   return (
-    <ScrollView
-      contentContainerStyle={{
+    <View
+      style={{
         flex: 1,
         backgroundColor: colors.deepBlue,
       }}
@@ -91,7 +91,7 @@ const PurchaseDetails = ({
             fontSize: fontSizes.h4,
           }}
         >
-          Purchase details
+          {languages.t(expressions.purchase_details)}
         </Text>
         <View
           style={{
@@ -143,7 +143,9 @@ const PurchaseDetails = ({
             }}
           >
             <View>
-              <Text style={styles.title}>Client</Text>
+              <Text style={styles.title}>
+                {languages.t(expressions.client)}
+              </Text>
               <Text
                 style={[
                   styles.subTitle,
@@ -152,7 +154,9 @@ const PurchaseDetails = ({
                   },
                 ]}
               >
-                {clientName === null ? "[DELETED]" : clientName}
+                {clientName === null
+                  ? languages.l(expressions.DELETED)
+                  : clientName}
               </Text>
             </View>
           </View>
@@ -170,10 +174,12 @@ const PurchaseDetails = ({
               <Text
                 style={{ fontSize: fontSizes.title, color: colors.darkBlue }}
               >
-                Products
+                {languages.t(expressions.products)}
               </Text>
               {products.length === 0 ? (
-                <Text style={{ color: colors.error }}>[DELETED]</Text>
+                <Text style={{ color: colors.error }}>
+                  {languages.t(expressions.DELETED)}
+                </Text>
               ) : (
                 purchaseProds
               )}
@@ -197,7 +203,7 @@ const PurchaseDetails = ({
               gap: Platform.OS == "ios" ? "5%" : 5,
             }}
           >
-            <Text style={styles.title}>Total:</Text>
+            <Text style={styles.title}>{languages.t(expressions.total)}</Text>
             <View>
               <Text style={styles.subTitle}>
                 {format_price(TOTAL, false) + " Da"}
@@ -212,10 +218,15 @@ const PurchaseDetails = ({
               gap: Platform.OS == "ios" ? "5%" : 5,
             }}
           >
-            <Text style={[styles.title, { color: colors.success }]}>Gain:</Text>
+            <Text style={[styles.title, { color: colors.success }]}>
+              {languages.t(expressions.gain)}
+            </Text>
             <View>
               <Text style={styles.subTitle}>
-                {gain ? format_price(gain[0].RESULT, false) + " Da" : "0 Da"}
+                {gain
+                  ? format_price(gain[0].RESULT, false) +
+                    ` ${languages.t(expressions.da)}`
+                  : `0 ${languages.t(expressions.da)}`}
               </Text>
             </View>
           </View>
@@ -225,10 +236,12 @@ const PurchaseDetails = ({
           color={colors.error}
           onPress={() => createTwoButtonAlert()}
         >
-          <Text style={styles.buttonContent}>Remove purchase</Text>
+          <Text style={styles.buttonContent}>
+            {languages.t(expressions.remove_purchase)}
+          </Text>
         </Button>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
